@@ -1,37 +1,44 @@
 ﻿#include <iostream>
 #include <map>
+#include <vector>
+#include <string>
 
 using namespace std;
 
-int main()
-{
-
-}
-
 class Solution {
-
-private:
-	map<string, int> romanNumMap;
-
 public:
-	Solution()
-	{
-		init();
-	}
+	string longestCommonPrefix(vector<string>& strs) {
 
-	void init()
-	{
-		romanNumMap.insert(make_pair("I", 1));
-		romanNumMap.insert(make_pair("V", 5));
-		romanNumMap.insert(make_pair("X", 10));
-		romanNumMap.insert(make_pair("L", 50));
-		romanNumMap.insert(make_pair("C", 100));
-		romanNumMap.insert(make_pair("D", 500));
-		romanNumMap.insert(make_pair("M", 1000));
-	}
+		int size = strs.size();
 
-public:
-	int romanToInt(string s) {
+		if (size <= 0)
+		{
+			return "";
+		}
 
+		int length = strs[0].length();
+
+		for (int i = 0; i < length; i++)
+		{
+			for (int j = 0; j < size; j++)
+			{
+				if (i >= strs[j].size() || strs[j].at(i) != strs[0].at(i))
+				{
+					return strs[0].substr(0, i);
+				}
+			}
+		}
+		return strs[0];
 	}
 };
+
+int main()
+{
+	vector<string> strs = { "flower","flow","flight" };
+	Solution* s = new Solution;
+	string result = s->longestCommonPrefix(strs);
+
+	std::cout << result;
+}
+
+
